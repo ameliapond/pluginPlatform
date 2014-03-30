@@ -14,6 +14,8 @@ public class ZoomIn implements IModidifier{
 	 * This method permits to zoom in (increase elements' size)
 	 */
 	public void modify(IMap map) {
+		if(map==null)
+			return;
 		// First : keep the curent state
 		if(!lastMaps.contains(map))
 			lastMaps.add(map);

@@ -1,4 +1,4 @@
-name=pluginModifier
-packageLocation=displaying.Runner
-viewer=cle.producer.core.
-default=true
+name=MapModifier
+type=modifier
+packageLocation=cle.modifier.MapModifier
+default=false

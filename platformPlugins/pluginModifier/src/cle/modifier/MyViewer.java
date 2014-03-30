@@ -6,16 +6,20 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTextPane;
+
 import cle.producer.data.IMap;
 
 public class MyViewer extends JPanel{
 	JPanel pnlSouth = new JPanel(new BorderLayout());
 	JScrollPane scroll = new JScrollPane(pnlSouth);
+	JTextPane txtPane = new JTextPane();
 	
 	private IMap theMap;
 	
@@ -36,7 +40,7 @@ public class MyViewer extends JPanel{
 	}
 	
 	private void getSouthPanal() {
-		
+		this.pnlSouth.add(new JScrollPane(this.txtPane));
 	}
 	
 	public JPanel getNorthPanal(){
@@ -45,6 +49,7 @@ public class MyViewer extends JPanel{
 		pnlNorth.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Modifiers Type"));
 		
 		List<String> allModifiers = new ArrayList<String>();
+		allModifiers.add("ChangeView");
 		allModifiers.add("MoveMap");
 		allModifiers.add("Rotation");
 		allModifiers.add("ZoomIn");
@@ -60,6 +65,7 @@ public class MyViewer extends JPanel{
 				try {
 					modifier = (IModidifier) Class.forName("cle.modifier."+className).getConstructor().newInstance();
 					modifier.modify(theMap);
+					txtPane.setText(className+" applied successfully\n"+txtPane.getText());
 					
 				} catch (Exception e1) {
 					e1.printStackTrace();

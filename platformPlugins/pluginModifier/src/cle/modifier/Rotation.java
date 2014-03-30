@@ -12,6 +12,8 @@ public class Rotation implements IModidifier {
 
 	@Override
 	public void modify(IMap map) {
+		if(map==null)
+			return;
 		this.map = map;
 		// Ask more infos ??
 		

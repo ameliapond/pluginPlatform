@@ -11,6 +11,8 @@ public class ZoomOut implements IModidifier{
 	List<IMap> lastMaps = new ArrayList<IMap>(); 
 	@Override
 	public void modify(IMap map) {
+		if(map==null)
+			return;
 		// First : keep the curent state
 		if(!lastMaps.contains(map))
 				lastMaps.add(map);

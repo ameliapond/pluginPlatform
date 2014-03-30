@@ -13,6 +13,8 @@ public class ChangeView implements IModidifier{
 	static float nuancy = (float) 10.5;
 	@Override
 	public void modify(IMap map) {
+		if(map==null)
+			return;
 		// First : keep the curent state
 		if(!lastMaps.contains(map))
 			lastMaps.add(map);
