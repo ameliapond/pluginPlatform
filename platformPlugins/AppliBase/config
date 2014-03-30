@@ -1,0 +1,5 @@
+name=AppliBase
+type=modifier
+packageLocation=cle.app.MapApplication
+default=true
+dependancesObligatoires=
