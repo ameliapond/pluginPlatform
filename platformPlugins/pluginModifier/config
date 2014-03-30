@@ -1,0 +1,4 @@
+name=pluginModifier
+packageLocation=displaying.Runner
+viewer=cle.producer.core.
+default=true
