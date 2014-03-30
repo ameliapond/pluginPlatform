@@ -1,0 +1,7 @@
+name=MapModifier
+type=modifier
+packageLocation=cle.modifier.MapModifier
+target=
+dependancesObligatoires=
+dependancesOptionnelles=
+default=false

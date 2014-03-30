@@ -1,0 +1,7 @@
+name=DataProducer
+type=producer
+target=IMap
+packageLocation=cle.producer.core.DataProducer
+dependancesObligatoires=
+dependancesOptionnelles=
+default=false

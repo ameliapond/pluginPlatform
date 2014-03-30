@@ -1,0 +1,40 @@
+package cle.modifier;
+
+import javax.swing.JComponent;
+
+import cle.producer.data.IMap;
+
+
+public class Rotation implements IModidifier {
+	IMap map;
+	int corner = 10;
+	public Rotation(){
+		
+	}
+
+	@Override
+	public void modify(IMap map) {
+		if(map==null)
+			return;
+		this.map = map;
+		// Ask more infos ??
+		
+		//looping data to modify position
+		
+		
+	}
+
+	@Override
+	public IMap reset() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public JComponent getView(IMap carte) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+}
