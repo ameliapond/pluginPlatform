@@ -22,9 +22,9 @@ public class Loader {
 	private String pluginPathDirectory;
 	
 	private Properties configPlatformData;
-	private Map<String, Properties> configPluginsData = new HashMap<String, Properties>();
-	private Map<String, Object> plugin = new HashMap<String, Object>();
-	private URLClassLoader platformClassLoader;
+	private static Map<String, Properties> configPluginsData = new HashMap<String, Properties>();
+	private static Map<String, Object> plugin = new HashMap<String, Object>();
+	private static URLClassLoader platformClassLoader;
 
 	public static void main(String[] args) throws FileNotFoundException {
 		
@@ -103,7 +103,7 @@ public class Loader {
 		System.out.println("->ClassLoader de la platforme créée.");
 	}
 
-	public List<Object> getDependancesAndTheirInterf(Properties prop, String type) {
+	private static List<Object> getDependancesAndTheirInterf(Properties prop, String type) {
 		System.out.println("-->[DEBUT]Recherche des dépendances obligatoires du plugin: "+prop.get("name"));
 		
 		Boolean dependanceIsAPlugin=true;
@@ -144,7 +144,7 @@ public class Loader {
 					// If it doesn't present, the dependance is not a plugin but
 					// product by a plugin (Example a data)
 	
-					if (this.configPluginsData.containsKey(dep)) {
+					if (configPluginsData.containsKey(dep)) {
 						
 						propOfCurrentDepPlugin = configPluginsData.get(dep);
 					}else {
@@ -152,7 +152,7 @@ public class Loader {
 						
 						/////////////////////////Recherche du plugin produisant la dependance courante////////////
 						
-							for (Properties CurrentProp : this.configPluginsData
+							for (Properties CurrentProp : configPluginsData
 									.values()) {
 		
 								if ((CurrentProp.getProperty("type").equals(toCompare))
@@ -235,7 +235,7 @@ public class Loader {
 
 	}
 
-	private Object instanceCreatorWithConstructor(
+	private static Object instanceCreatorWithConstructor(
 			List<Object> currentPluginDependance,
 			Properties propOfCurrentDepPlugin) throws ClassNotFoundException,
 			NoSuchMethodException, InstantiationException,
@@ -243,7 +243,7 @@ public class Loader {
 
 		Class<?> currentPluginClass = Class.forName(
 				propOfCurrentDepPlugin.getProperty("packageLocation"), false,
-				this.platformClassLoader);
+				platformClassLoader);
 		Constructor construt = currentPluginClass
 				.getConstructor(getClassFromString((List<Object>) currentPluginDependance.get(1)));
 		Object ob = construt.newInstance(listToArray((List<Object>) currentPluginDependance.get(0)));
@@ -251,7 +251,7 @@ public class Loader {
 		return ob;
 	}
 
-	private Object[] listToArray(List<Object> currentPluginDependance) {
+	private static Object[] listToArray(List<Object> currentPluginDependance) {
 		return currentPluginDependance
 				.toArray(new Object[currentPluginDependance.size()]);
 	}
@@ -345,7 +345,7 @@ public class Loader {
 		}
 		
 
-	private Object instanceCreatorWithDeps(Properties prop)
+	private static Object instanceCreatorWithDeps(Properties prop)
 			throws ClassNotFoundException, NoSuchMethodException,
 			InstantiationException, IllegalAccessException,
 			InvocationTargetException {
@@ -371,7 +371,7 @@ public class Loader {
 		return objcetInstance;
 	}
 
-	private Object instanceCreator(Properties prop)
+	private static Object instanceCreator(Properties prop)
 			throws ClassNotFoundException, InstantiationException,
 			IllegalAccessException {
 		Object objectInstance;
@@ -383,7 +383,7 @@ public class Loader {
 		return objectInstance;
 	}
 
-	private Class<?>[] getClassFromString(List<Object> listOfStringClass) throws ClassNotFoundException {
+	private static Class<?>[] getClassFromString(List<Object> listOfStringClass) throws ClassNotFoundException {
 
 		Class<?> classOfEachObjects[] = new Class<?>[listOfStringClass.size()];
 		int p = 0;
@@ -399,12 +399,12 @@ public class Loader {
 
 	// Renvoie une instance identifiée par son nom et son interface principale
 	// Si plusieurs type de interf
-	public Object getInstanceOf(String interf, String nameInstance) throws ClassNotFoundException, NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException {
+	public static Object getInstanceOf(String interf, String nameInstance) throws ClassNotFoundException, NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException {
 		Boolean isPlugin = true;
 		String pluginType;
 		String pluginTarget;
 		Properties propOfCurrentDepPlugin=null;
-		Object tempInstance = this.plugin.get(nameInstance);
+		Object tempInstance = plugin.get(nameInstance);
 
 		if (tempInstance != null) {
 
@@ -413,14 +413,14 @@ public class Loader {
 		} else {
 			
 			
-			if (this.configPluginsData.containsKey(nameInstance)) {
+			if (configPluginsData.containsKey(nameInstance)) {
 
 				propOfCurrentDepPlugin = configPluginsData.get(nameInstance);
 
 
 			} else {
 				isPlugin = false;
-				for (Properties CurrentProp : this.configPluginsData.values()) {
+				for (Properties CurrentProp : configPluginsData.values()) {
 
 					if ((CurrentProp.getProperty("type").equals("producer"))
 							&& (CurrentProp.getProperty("target")
