@@ -1,0 +1,7 @@
+name=Displayer
+packageLocation=displaying.Displayer
+type=displayer
+target=
+dependancesObligatoires=
+dependancesOptionnelles=
+default=false

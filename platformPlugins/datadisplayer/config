@@ -1,0 +1,8 @@
+name=datadisplayer
+packageLocation=displaying.GUIHelper
+type=datadisplayer
+target=
+dependancesObligatoires=interfaces.IAfficheur,Displayer
+dependancesOptionnelles=
+loaded=
+default=true

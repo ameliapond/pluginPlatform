@@ -1,0 +1,6 @@
+#type;name;x;y;size
+Building;building;50;100;100
+Building;factory;200;50;100
+Building;school;50;200;100
+Road;road;50;30;50
+Lawn;lawn;100;200;20
