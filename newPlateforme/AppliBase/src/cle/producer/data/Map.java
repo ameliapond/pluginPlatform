@@ -75,4 +75,10 @@ public class Map implements IMap{
 		this.item = list;
 		
 	}
+
+	@Override
+	public boolean componentCompare(IComponent comp) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }

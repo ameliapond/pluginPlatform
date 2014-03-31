@@ -131,7 +131,7 @@ public class MapApplication extends JFrame implements ActionListener{
 		JTabbedPane tabbedPane = new JTabbedPane();
 		
 		// loading producer
-			Object o = Loader.getInstanceOf("IDataProducer", "DataProducer");
+			Object o = Loader.getInstanceOf(IDataProducer.class, "DataProducer");
 			this.myMap = (IMap)((IDataProducer)o).getMap();
 			System.out.println("first:"+this.myMap.getItems().size());
 			//this.myMap = new Map();
@@ -140,13 +140,13 @@ public class MapApplication extends JFrame implements ActionListener{
 			tabbedPane.setMnemonicAt(0, KeyEvent.VK_P);
 			
 			//loading afficher
-			Object aff = Loader.getInstanceOf("IAfficheur", "Displayer");
+			Object aff = Loader.getInstanceOf(IAfficheur.class, "Displayer");
 			
 			tabbedPane.addTab("Data Displayer", ((IAfficheur) aff).getView(myMap));
 			tabbedPane.setMnemonicAt(1, KeyEvent.VK_D);
 			
 			//loading modifier
-			Object mod = Loader.getInstanceOf("IModidifier", "MapModifier");
+			Object mod = Loader.getInstanceOf(IModidifier.class, "MapModifier");
 			
 			tabbedPane.addTab("Data Modifier", ((IModidifier) mod).getView(myMap));
 			tabbedPane.setMnemonicAt(2, KeyEvent.VK_M);
