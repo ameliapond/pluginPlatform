@@ -21,4 +21,8 @@ public interface IComponent {
 	public Color getComponentColor();
 	
 	public void setComponentColor(Color color);
+	
+	public boolean positionCoincide(IComponent c1);
+	
+	public boolean equal(IComponent c1);
 }

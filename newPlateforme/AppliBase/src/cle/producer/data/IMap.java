@@ -14,4 +14,5 @@ public interface IMap {
 	public void printMapComponents();
 	public void addComponents(IComponent component);
 	public void removeComponents(IComponent component);
+	public boolean componentCompare(IComponent comp);
 }
