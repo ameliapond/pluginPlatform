@@ -55,22 +55,40 @@ public class DataProducer implements IDataProducer {
 		if (scanner != null) {
 			while (scanner.hasNextLine()) {
 
-				String line = scanner.next();
+				String line = scanner.nextLine();
 				if (!(line.startsWith("#"))) {
 					IComponent compo;
 					str = line.split(";");
 					String className = str[0];
+					if(str.length < 1)
+						continue;
 					String name = str[1];
+					if(str.length < 2)
+						continue;
 					int posX = Integer.parseInt(str[2]);
+					if(str.length < 3)
+						continue;
 					int posY = Integer.parseInt(str[3]);
-					
+					if(str.length < 4)
+						continue;
 					double width = Double.parseDouble(str[4]);
+					if(str.length < 5)
+						continue;
 					double height = Double.parseDouble(str[5]);
+					if(str.length < 6)
+						continue;
 					
 					try {
 						compo = (IComponent) Class.forName("cle.producer.data."+className).getConstructor(String.class, Point.class, Size.class).newInstance(name, new Point(posX, posY), new Size(width, height));
 						//compo.setComponentColor(txtColor.getBackground());
+						
+						boolean b = this.myMap.componentCompare(compo);
+						if(b == false)
 						this.myMap.getItems().add(compo);
+						else {
+							System.out.println("component coincide ");
+							continue;
+						}	
 					} catch (InstantiationException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -95,7 +113,7 @@ public class DataProducer implements IDataProducer {
 					}
 					
 				}
-
+				
 			}
 			
 			scanner.close();

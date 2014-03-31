@@ -75,4 +75,15 @@ public class Map implements IMap{
 		this.item = list;
 		
 	}
+	@Override
+	public boolean componentCompare(IComponent comp){
+		
+		for(IComponent ic : this.getItems()){
+			if((ic.equal(comp) || ic.positionCoincide(comp))){
+				return true;
+			}
+		}
+		return false;
+		
+	}
 }

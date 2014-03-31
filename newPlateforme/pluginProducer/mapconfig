@@ -1,6 +1,3 @@
-#type;name;x;y;sizeW;sizeH;color
+#type;name;x;y;sizeW;sizeH
 Building;building;2;5;10.10;11.2
-Building;factory;3;6;11.5;3.4
-Building;school;10;4;10.10;11.2
-Road;road;16;2;13.3;3.4
-Lawn;lawn;11;1;11.1;3.4
+Building;building;13;5;11.5;3.4
