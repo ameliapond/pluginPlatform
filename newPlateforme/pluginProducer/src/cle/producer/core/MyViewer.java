@@ -50,6 +50,7 @@ public class MyViewer extends JPanel implements Accessible{
 	}
 	public MyViewer(IMap myMap) {
 		this.myMap = myMap;
+		this.myMap.setBackground(Color.BLUE);
 		initialize();
 	}
 	
@@ -153,7 +154,7 @@ public class MyViewer extends JPanel implements Accessible{
 			public void keyPressed(KeyEvent e) {}
 		};
 		// Field Name
-		final JTextField txtName = new JTextField("test", nbCol);
+		final JTextField txtName = new JTextField("TestComp", nbCol);
 		//txtName.setSize(commonDim);
 		
 		// Field width
@@ -216,9 +217,12 @@ public class MyViewer extends JPanel implements Accessible{
 					myMap.getItems().add(compo);
 					MyViewer.this.getSouthPanal();
 					
-					pnlError.setText("new add in map size"+myMap.getItems().size());
+					//pnlError.setText("new add in map size"+myMap.getItems().size());
+					//pnlError.setText("Color"+myMap.getBackground());
+					//System.out.println("Prod: color "+myMap.getBackground());
 				} catch (Exception e1) {
-					e1.printStackTrace();
+					//e1.printStackTrace();
+					pnlError.setText("Exception"+e1.getMessage());
 				} 
 				
 			}
@@ -306,7 +310,7 @@ public class MyViewer extends JPanel implements Accessible{
 		System.out.println("File choosen: "+name+" - "+abspath);
 	}
 
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		MyViewer app = new MyViewer();
 		
 		JFrame fram = new JFrame();
@@ -318,5 +322,5 @@ public class MyViewer extends JPanel implements Accessible{
 		fram.setResizable(true); 
 		fram.setContentPane(app.getView());
 		fram.setVisible(true);
-	}
+	}*/
 }

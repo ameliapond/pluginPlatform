@@ -6,7 +6,6 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
-import java.lang.reflect.InvocationTargetException;
 
 import javax.swing.JFrame;
 import javax.swing.JMenu;
@@ -14,7 +13,6 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JTabbedPane;
 import javax.swing.KeyStroke;
-
 import loader.Loader;
 import cle.displayer.IAfficheur;
 import cle.modifier.IModidifier;
@@ -66,6 +64,13 @@ public class MapApplication extends JFrame implements ActionListener{
 		menu.add(menuItem);
 		menuBar.add(menuItem);
 		
+		// Sub menu test
+		menuItem = new JMenuItem("Test");
+		menuItem.setMnemonic(KeyEvent.VK_E);
+		menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_T, ActionEvent.ALT_MASK));
+		menuItem.setActionCommand("test");
+		menuItem.addActionListener(this);
+		menu.add(menuItem);
 		// Sub menu quit
 		menuItem = new JMenuItem("Exit");
 		menuItem.setMnemonic(KeyEvent.VK_E);
@@ -102,6 +107,10 @@ public class MapApplication extends JFrame implements ActionListener{
 			System.out.println("quit");
 			return;
 		}
+		else if ("test".equals(e.getActionCommand())) {
+			System.out.println("SZ"+this.myMap.getItems().size());
+			return;
+		}
 		else if ("load".equals(e.getActionCommand())) {
 			try {
 				this.load();
@@ -116,23 +125,11 @@ public class MapApplication extends JFrame implements ActionListener{
 	private void load() throws Exception {
 		JTabbedPane tabbedPane = new JTabbedPane();
 		
-		/*MyViewerProd producer = new MyViewerProd();
-		this.myMap = (IMap) producer.myMap;
-		tabbedPane.addTab("Data Producer", producer.getView());
-		tabbedPane.setMnemonicAt(0, KeyEvent.VK_P);
-		
-		MyViewer afficheur = new MyViewer(myMap);
-		tabbedPane.addTab("Data Afficher", afficheur.getView());
-		tabbedPane.setMnemonicAt(1, KeyEvent.VK_A);
-		
-		/*MyModifier modifier = new MyModifier(myMap);
-		tabbedPane.addTab("Data Modifier", modifier.getView());*/
-		//tabbedPane.setMnemonicAt(2, KeyEvent.VK_M);
-		
 		// loading producer
 			Loader.log("load producer");
 			Object o = Loader.getInstanceOf("IDataProducer", "DataProducer");
 			this.myMap = (IMap)((IDataProducer)o).getMap();
+			//this.myMap = new Map();
 			
 			tabbedPane.addTab("Data Producer", ((IDataProducer) o).getView());
 			tabbedPane.setMnemonicAt(0, KeyEvent.VK_P);
@@ -158,7 +155,7 @@ public class MapApplication extends JFrame implements ActionListener{
 		this.add(tabbedPane, BorderLayout.CENTER);
 		
 		this.validate();
-		Loader.log("test bon 1");
+		Loader.log("color 1"+myMap.getBackground());
 	}
 	
 	public static void main(String[] args) {

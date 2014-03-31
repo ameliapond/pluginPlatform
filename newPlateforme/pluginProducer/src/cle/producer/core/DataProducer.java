@@ -1,12 +1,10 @@
 package cle.producer.core;
 
 import java.awt.Color;
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
-import java.util.Scanner;
 
 import javax.swing.JComponent;
 
@@ -15,10 +13,14 @@ import cle.producer.data.*;
 public class DataProducer implements IDataProducer{
 
 	public String ressourcesPath;
-	
+	public IMap myMap = null;	
 	
 	public DataProducer() {
-		
+		this.myMap = new Map();
+	}
+	
+	public void setMap(IMap map){
+		map = this.myMap;
 	}
 	
 	public DataProducer(String resPath, Properties prop ) {
@@ -29,7 +31,7 @@ public class DataProducer implements IDataProducer{
 	
 	
 	@Override
-	public Map getMap() throws FileNotFoundException {
+	public IMap getMap(){
 		
 		
 		String str[] ;
@@ -73,7 +75,7 @@ public class DataProducer implements IDataProducer{
 		     }
 		  
 		  }*/
-		 return new Map();
+		 	return this.myMap;
 		 }
 
 	 public static void main(String args[]) throws FileNotFoundException{
@@ -85,15 +87,7 @@ public class DataProducer implements IDataProducer{
 	 }
 
 	public JComponent getView() {
-		IMap map = null;
-		try {
-			map = getMap();
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		System.out.println("Test");
-		MyViewer view = new MyViewer(map);
+		MyViewer view = new MyViewer(this.myMap);
 		return view.getView();
 	}
 	

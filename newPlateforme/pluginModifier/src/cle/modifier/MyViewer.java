@@ -1,6 +1,7 @@
 package cle.modifier;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -66,6 +67,11 @@ public class MyViewer extends JPanel{
 					modifier = (IModidifier) Class.forName("cle.modifier."+className).getConstructor().newInstance();
 					modifier.modify(theMap);
 					txtPane.setText(className+" applied successfully"+" NBElem:"+theMap.getItems().size()+"\n"+txtPane.getText());
+					
+					//modify color
+					System.out.println("Modif: old color"+theMap.getBackground());
+					theMap.setBackground(Color.YELLOW);
+					System.out.println("Modif: new color"+theMap.getBackground());
 					
 				} catch (Exception e1) {
 					e1.printStackTrace();
