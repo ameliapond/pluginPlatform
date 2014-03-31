@@ -23,6 +23,7 @@ public class MapApplication extends JFrame implements ActionListener{
 
 	private static final long serialVersionUID = 1L;
 	IMap myMap;
+	boolean isLoad = false;
 	public MapApplication(){
 		this.setLayout(new BorderLayout());
 		
@@ -123,10 +124,13 @@ public class MapApplication extends JFrame implements ActionListener{
 	}
 
 	private void load() throws Exception {
+		if(isLoad)
+			return;
+		
+		isLoad = true;
 		JTabbedPane tabbedPane = new JTabbedPane();
 		
 		// loading producer
-			Loader.log("load producer");
 			Object o = Loader.getInstanceOf("IDataProducer", "DataProducer");
 			this.myMap = (IMap)((IDataProducer)o).getMap();
 			System.out.println("first:"+this.myMap.getItems().size());
@@ -136,27 +140,21 @@ public class MapApplication extends JFrame implements ActionListener{
 			tabbedPane.setMnemonicAt(0, KeyEvent.VK_P);
 			
 			//loading afficher
-			Loader.log("load displayer");			
 			Object aff = Loader.getInstanceOf("IAfficheur", "Displayer");
 			
 			tabbedPane.addTab("Data Displayer", ((IAfficheur) aff).getView(myMap));
 			tabbedPane.setMnemonicAt(1, KeyEvent.VK_D);
 			
 			//loading modifier
-			Loader.log("load modifier");			
 			Object mod = Loader.getInstanceOf("IModidifier", "MapModifier");
 			
 			tabbedPane.addTab("Data Modifier", ((IModidifier) mod).getView(myMap));
 			tabbedPane.setMnemonicAt(2, KeyEvent.VK_M);
 		
-		Loader.log("map not null");
-		if(this.myMap==null)
-			Loader.log("map is null");
 
 		this.add(tabbedPane, BorderLayout.CENTER);
 		
 		this.validate();
-		Loader.log("color 1"+myMap.getBackground());
 	}
 	
 	public static void main(String[] args) {

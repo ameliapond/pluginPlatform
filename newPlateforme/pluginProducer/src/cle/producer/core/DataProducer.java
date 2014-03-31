@@ -20,7 +20,7 @@ public class DataProducer implements IDataProducer {
 
 	public DataProducer() {
 		this.myMap = new Map();
-		this.getMap(); // Add default values to the Map
+		//this.getMap(); // Add default values to the Map
 	}
 
 	public DataProducer(String resPath, Properties prop) {
