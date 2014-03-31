@@ -30,17 +30,13 @@ import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
-
-import cle.producer.data.Component;
 import cle.producer.data.IComponent;
 import cle.producer.data.IMap;
 import cle.producer.data.Map;
 import cle.producer.data.Point;
 import cle.producer.data.Size;
-import cle.producer.utils.Grid;
 
 public class MyViewer extends JPanel implements Accessible{
 
@@ -72,35 +68,6 @@ public class MyViewer extends JPanel implements Accessible{
 	
 	private void getSouthPanal() {
 		//JPanel pnlSouth = new JPanel();
-		String[] entetes = {"Type", "Name", "Width", "Height", "Pos X", "Pos Y", "Color"};
-		
-		Object[][] data = new Object[0][0];
-		if(myMap != null && !myMap.getItems().isEmpty()){
-			data = new Object[myMap.getItems().size()][entetes.length];
-			int i = 0;
-			for(IComponent comp : myMap.getItems()){
-				data[i][0] = comp.getClass().getName();
-				data[i][1] = comp.getComponentName();
-				data[i][2] = comp.getComponentsize().getWidth();
-				data[i][3] = comp.getComponentsize().getHeight();
-				data[i][4] = comp.getComponentPosition().getX();
-				data[i][5] = comp.getComponentPosition().getY();
-				
-				JButton label = new JButton();
-				label.setBackground(comp.getComponentColor());
-				data[i][6] = label;
-				i++;
-			}
-		}
-		
-		Grid tableau = new Grid(entetes, data, null);
-		if(this.pnlSouth.getComponents().length == 0){
-			JScrollPane scroll = new JScrollPane(/*tableau.getTable()*/);
-			this.pnlSouth.add(scroll);
-		}
-		JScrollPane scroll = (JScrollPane) this.pnlSouth.getComponent(0);
-		scroll.setViewportView(tableau.getTable());
-		//return pnlSouth;
 	}
 
 	public JPanel getNorthPanal(){
