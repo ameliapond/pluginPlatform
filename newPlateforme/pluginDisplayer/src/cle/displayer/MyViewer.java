@@ -79,7 +79,7 @@ public class MyViewer extends JPanel {
 				// view to dis[lay
 				String className = (String) cbxTypeView.getSelectedItem();
 				IAfficheur viewer;
-				pnlError.setText("className:"+className);
+				//pnlError.setText("className:"+className);
 				try {
 					pnlSouth.removeAll();
 					viewer = (IAfficheur) Class.forName("cle.displayer."+className).getConstructor(JPanel.class).newInstance(pnlSouth);
