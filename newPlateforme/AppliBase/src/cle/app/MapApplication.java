@@ -129,6 +129,7 @@ public class MapApplication extends JFrame implements ActionListener{
 			Loader.log("load producer");
 			Object o = Loader.getInstanceOf("IDataProducer", "DataProducer");
 			this.myMap = (IMap)((IDataProducer)o).getMap();
+			System.out.println("first:"+this.myMap.getItems().size());
 			//this.myMap = new Map();
 			
 			tabbedPane.addTab("Data Producer", ((IDataProducer) o).getView());
