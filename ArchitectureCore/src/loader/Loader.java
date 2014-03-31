@@ -264,25 +264,6 @@ public class Loader {
 		this.configPlatformData = configPlatformData;
 	}
 
-	
-	/*public List<Object> loadAvailablePlugin() throws ClassNotFoundException, NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException{
-		
-		FileInputStream currentPluginFileTemp;
-		Object pluginInstance;
-		List<Object> availablePlugin = new ArrayList<Object>();
-
-		for(Properties propp : this.configPluginsData.values()){
-				
-			pluginInstance = instanceCreatorWithDeps(propp);
-			availablePlugin.add(pluginInstance);
-			
-			this.plugin.put(propp.getProperty("name"),pluginInstance);
-				
-		}
-			
-		return availablePlugin;			
-	}*/
-
 	private void loadConfigPluginsData() throws MalformedURLException {
 		Properties prop;
 		FileInputStream currentPluginFileTemp;
@@ -343,7 +324,12 @@ public class Loader {
 		System.out.println("[FIN]Chargement des plugins par défaut");
 		
 		}
+	
+	private boolean checkMainInterfOf(Object plugin, Class<?> mainInterf){
 		
+		return false;
+		
+	}
 
 	private static Object instanceCreatorWithDeps(Properties prop)
 			throws ClassNotFoundException, NoSuchMethodException,
@@ -399,12 +385,12 @@ public class Loader {
 
 	// Renvoie une instance identifiée par son nom et son interface principale
 	// Si plusieurs type de interf
-	public static Object getInstanceOf(String interf, String nameInstance) throws ClassNotFoundException, NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException {
+	public static Object getInstanceOf(Class<?> interf, String nameInstance) throws ClassNotFoundException, NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException {
 		Boolean isPlugin = true;
-		String pluginType;
-		String pluginTarget;
 		Properties propOfCurrentDepPlugin=null;
 		Object tempInstance = plugin.get(nameInstance);
+		
+		
 
 		if (tempInstance != null) {
 
