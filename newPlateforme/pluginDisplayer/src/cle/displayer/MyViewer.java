@@ -65,6 +65,7 @@ public class MyViewer extends JPanel {
 		
 		List<String> allType = new ArrayList<String>();
 		allType.add("GUIView");
+		allType.add("GridView");
 		allType.add("TextView");
 		final JComboBox cbxTypeView = new JComboBox(allType.toArray());
 		pnlNorth.add(cbxTypeView);
@@ -83,6 +84,7 @@ public class MyViewer extends JPanel {
 					pnlSouth.removeAll();
 					viewer = (IAfficheur) Class.forName("cle.displayer."+className).getConstructor(JPanel.class).newInstance(pnlSouth);
 					viewer.affiche(theMap);
+					
 					MyViewer.this.repaint();
 					MyViewer.this.validate();
 					//System.out.println("2-sz comp:"+pnlSouth.getComponents().length);
