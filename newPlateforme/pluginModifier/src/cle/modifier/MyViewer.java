@@ -52,26 +52,27 @@ public class MyViewer extends JPanel{
 		List<String> allModifiers = new ArrayList<String>();
 		allModifiers.add("ChangeView");
 		allModifiers.add("MoveMap");
-		allModifiers.add("Rotation");
+		//allModifiers.add("Rotation");
 		allModifiers.add("ZoomIn");
 		allModifiers.add("ZoomOut");
 		
 		ActionListener listener = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				if(theMap == null || theMap.getItems().size()==0)
+					return;
+				
 				JButton src = (JButton) e.getSource();
 				String className = (String) src.getText();
-				System.out.println("cls:"+className);
+				//System.out.println("cls:"+className);
 				IModidifier modifier;
 				try {
 					modifier = (IModidifier) Class.forName("cle.modifier."+className).getConstructor().newInstance();
 					modifier.modify(theMap);
-					txtPane.setText(className+" applied successfully"+" NBElem:"+theMap.getItems().size()+"\n"+txtPane.getText());
+					txtPane.setText(className+" applied successfully"+"\n"+txtPane.getText());
 					
 					//modify color
-					System.out.println("Modif: old color"+theMap.getBackground());
 					theMap.setBackground(Color.YELLOW);
-					System.out.println("Modif: new color"+theMap.getBackground());
 					
 				} catch (Exception e1) {
 					e1.printStackTrace();
